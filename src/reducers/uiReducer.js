@@ -1,20 +1,18 @@
 import { types } from "../types/types";
 
+const initialState = {
+    activePage: {},
+}
 
-// const initialState = {
-//     activePage: {},
-// }
-
-export const uiReducer = (state = {}, action) => {
-    console.log("uiReducer");
+export const uiReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.uiSetActivePage:
             return {
                 ...state,
                 activePage: action.payload
             }
-            
-    
+
+
         default:
             return state;
     }

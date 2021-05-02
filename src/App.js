@@ -1,12 +1,14 @@
 import { Provider } from "react-redux";
-import { AppRouter } from "./routers/AppRouter";
+import { Main } from "./components/Main";
+import { Navbar } from "./components/Navbar";
 import { store } from "./store/store";
 
 
 function App() {
   return (
     <Provider store={store}>
-      <AppRouter />
+      <Navbar />
+      <Main />
     </Provider>
   )
 }

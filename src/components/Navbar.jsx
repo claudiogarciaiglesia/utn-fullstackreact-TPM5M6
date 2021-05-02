@@ -1,17 +1,24 @@
 import React from 'react'
-// import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
+
+import { uiSetActivePage } from '../actions/ui';
 import { NavListItem } from './NavListItem';
 
 export const Navbar = () => {
 
-    // const activePage = useSelector(state => state.ui.activePage);
-    console.log("navbar loading");
+    const dispatch = useDispatch();
+
+    const activePage = useSelector(state => state.ui.activePage);
+
+    const handleClick = (value) => {
+        dispatch(uiSetActivePage(value))
+    }
 
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="/">My books</a>
+                    <span className="navbar-brand unselectable">My books</span>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -19,27 +26,28 @@ export const Navbar = () => {
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <NavListItem
-                                    // active={activePage === "booklist" && true}
-                                    href={"booklist"}
-                                    name={"Book List"}
+                                    active={activePage === "booklist" && true}
+                                    text={"Book List"}
+                                    onClick={() => {
+                                        handleClick("booklist")
+                                    }}
                                 />
-                                {/* <a className={`nav-link ${activePage === "booklist" && "active"}`} aria-current="page" href="booklist">Book List</a> */}
                             </li>
                             <li className="nav-item">
                                 <NavListItem
-                                    // active={activePage === "categories" && true}
-                                    href={"categories"}
-                                    name={"Categories"}
-                                />
-                                {/* <a className={`nav-link ${activePage === "categories" && "active"}`} href="categories">Categories</a> */}
+                                    active={activePage === "categories" && true}
+                                    text={"Categories"}
+                                    onClick={() => {
+                                        handleClick("categories")
+                                    }} />
                             </li>
                             <li className="nav-item">
                                 <NavListItem
-                                    // active={activePage === "people" && true}
-                                    href={"people"}
-                                    name={"People"}
-                                />
-                                {/* <a className={`nav-link ${activePage === "people" && "active"}`} href="people">People</a> */}
+                                    active={activePage === "people" && true}
+                                    text={"People"}
+                                    onClick={() => {
+                                        handleClick("people")
+                                    }} />
                             </li>
                         </ul>
                     </div>

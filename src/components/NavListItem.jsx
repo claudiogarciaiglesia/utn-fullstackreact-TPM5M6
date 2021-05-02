@@ -1,13 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-export const NavListItem = ({href, name}) => {
-
-    const activePage = useSelector(state => state.ui.activePage);
+export const NavListItem = ({ active, text, onClick }) => {
 
     return (
         <div>
-            <a className={`nav-link ${activePage === href && "active"}`} aria-current="page" href={href}>{name}</a>
+            <span style={{ 'cursor': 'pointer' }} className={`nav-link ${active && "active"} unselectable`} onClick={onClick} aria-current="page">{text}</span>
         </div>
     )
 }

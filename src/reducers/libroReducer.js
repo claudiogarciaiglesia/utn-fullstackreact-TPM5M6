@@ -1,10 +1,26 @@
-export const libroReducer = (state = {}, action) => {
-switch (action.type) {
-    // case action.type:
-        
-        
+import { types } from "../types/types";
 
-    default:
-        return state;
+
+const initialState = {
+    loaded: false,
+    list: []
 }
+
+
+export const libroReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case types.libroListLoaded:
+            return {
+                ...state,
+                list: [...state.list,
+                action.payload
+                ]
+            }
+
+
+
+        default:
+            return state;
+    }
 }
+

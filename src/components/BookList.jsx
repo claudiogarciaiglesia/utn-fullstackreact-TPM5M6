@@ -1,18 +1,16 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { uiSetActivePage } from '../actions/ui';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { libroStartLoadList } from '../actions/libro';
 
 export const BookList = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    const libroLoaded = useSelector(state => state.libro.loaded);
 
-        dispatch(uiSetActivePage("booklist"))
-
-    }, [dispatch])
+    if (!libroLoaded) {
+        dispatch(libroStartLoadList())
+    }
 
     return (
         <div>
