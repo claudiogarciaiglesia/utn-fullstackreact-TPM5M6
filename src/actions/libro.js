@@ -12,17 +12,11 @@ export const libroStartLoadList = () => {
         try {
             const response = await axios.get(url);
             dispatch(libroListLoaded(response.data));
-            dispatch(libroSetDBUpdated(false));
         } catch (error) {
             console.log(error);
         }
     }
 };
-
-const libroSetDBUpdated = (value) => ({
-    type: types.libroSetDBUpdated,
-    payload: value
-});
 
 const libroListLoaded = (libros) => ({
     type: types.libroListLoaded,
@@ -32,14 +26,12 @@ const libroListLoaded = (libros) => ({
 export const libroStartDelete = (id) => {
 
     const url = `${baseUrl}libro/${id}`;
-    console.log(url);
 
     return async (dispatch) => {
         try {
             const response = await axios.delete(url);
             console.log(response);
             dispatch(libroDelete(id));
-            dispatch(libroSetDBUpdated(true));
         } catch (error) {
             console.log(error);
         }
@@ -48,7 +40,9 @@ export const libroStartDelete = (id) => {
 
 const libroDelete = (id) => ({
     type: types.libroDelete,
-    payload: id
+    payload: {
+        id: id,
+    }
 });
 
 export const libroStartEdit = () => {
@@ -62,17 +56,27 @@ const libroEdit = (id) => ({
     payload: id
 });
 
-export const libroStartBorrow = () => {
-    return async (dispatch) => {
+export const libroStartBorrow = (id, persona_id, alias) => {
 
+    const url = `${baseUrl}libro/prestar/${id}`;
+
+    return async (dispatch) => {
+        try {
+            const response = await axios.put(url, { persona_id: persona_id });
+            console.log(response);
+            dispatch(libroBorrow(id, persona_id, alias));
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
-const libroBorrow = (id, user_id) => ({
+const libroBorrow = (id, persona_id, alias) => ({
     type: types.libroBorrow,
     payload: {
         id: id,
-        user_id: user_id
+        persona_id: persona_id,
+        alias: alias
     }
 });
 

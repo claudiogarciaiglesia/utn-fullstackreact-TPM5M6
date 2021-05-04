@@ -7,15 +7,13 @@ export const BookList = () => {
 
     const dispatch = useDispatch();
 
-    const dbUpdated = useSelector(state => state.libro.dbUpdated);
     const libros = useSelector(state => state.libro.list);
 
     useEffect(() => {
 
-        if (dbUpdated) {
-            dispatch(libroStartLoadList())
-        }
-    }, [dbUpdated, dispatch])
+        dispatch(libroStartLoadList())
+
+    }, [dispatch])
 
     return (
         <div>

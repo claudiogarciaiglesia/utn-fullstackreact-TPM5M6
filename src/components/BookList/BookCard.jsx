@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { libroStartDelete } from '../../actions/libro';
+import { libroStartBorrow, libroStartDelete } from '../../actions/libro';
 
 export const BookCard = ({ nombre, descripcion, categoria, alias, id, persona_id, categoria_id }) => {
 
@@ -8,6 +8,11 @@ export const BookCard = ({ nombre, descripcion, categoria, alias, id, persona_id
 
     const handleDelete = () => {
         dispatch(libroStartDelete(id));
+    }
+
+    const handleBorrow = () => {
+        // Esto se debe completar con un MODAL para seleccionar a la persona
+        dispatch(libroStartBorrow(id, 1, 'NMANSILLA'));
     }
 
     return (
@@ -18,8 +23,10 @@ export const BookCard = ({ nombre, descripcion, categoria, alias, id, persona_id
             <span className="bookcard-item">Alias: {alias}</span>
             <button className="btn btn-danger bookcard-button" onClick={handleDelete}>Borrar</button>
             <button className="btn btn-secondary bookcard-button">Modificar</button>
-            <button className="btn btn-secondary bookcard-button">Prestar</button>
-            <button className="btn btn-secondary bookcard-button">Devolver</button>
+            {!persona_id
+                ? <button className="btn btn-secondary bookcard-button" onClick={handleBorrow}>Prestar</button>
+                : <button className="btn btn-secondary bookcard-button">Devolver</button>
+            }
             <hr />
         </div>
     )

@@ -2,7 +2,6 @@ import { types } from "../types/types";
 
 
 const initialState = {
-    dbUpdated: true,
     list: []
 }
 
@@ -15,13 +14,23 @@ export const libroReducer = (state = initialState, action) => {
                 list: [...action.payload]
             }
 
-        case types.libroSetDBUpdated:
+        case types.libroDelete:
             return {
                 ...state,
-                dbUpdated: action.payload
+                list: state.list.filter(
+                    book => (book.id !== action.payload.id)
+                )
             }
 
-        // case types.libroDelete:
+        case types.libroBorrow:
+            return {
+                ...state,
+                list: state.list.map(
+                    book => (book.id === action.payload.id)
+                        ? { ...book, persona_id: action.payload.persona_id, alias: action.payload.alias }
+                        : book
+                )
+            }
 
 
 
