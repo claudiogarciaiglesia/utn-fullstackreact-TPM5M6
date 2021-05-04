@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import { Main } from "./components/Main";
-import { Navbar } from "./components/Navbar";
+import { Navbar } from "./components/Navbar/Navbar";
 import { store } from "./store/store";
 
 

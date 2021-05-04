@@ -2,7 +2,7 @@ import { types } from "../types/types";
 
 
 const initialState = {
-    loaded: false,
+    dbUpdated: true,
     list: []
 }
 
@@ -12,10 +12,16 @@ export const libroReducer = (state = initialState, action) => {
         case types.libroListLoaded:
             return {
                 ...state,
-                list: [...state.list,
-                action.payload
-                ]
+                list: [...action.payload]
             }
+
+        case types.libroSetDBUpdated:
+            return {
+                ...state,
+                dbUpdated: action.payload
+            }
+
+        // case types.libroDelete:
 
 
 

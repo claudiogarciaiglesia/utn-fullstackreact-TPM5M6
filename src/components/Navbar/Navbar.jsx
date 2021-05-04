@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { uiSetActivePage } from '../actions/ui';
+import { uiSetActivePage } from '../../actions/ui';
 import { NavListItem } from './NavListItem';
 
 export const Navbar = () => {
@@ -15,7 +15,7 @@ export const Navbar = () => {
     }
 
     return (
-        <div>
+        <div className="sticky">
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <span className="navbar-brand unselectable">My books</span>

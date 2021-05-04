@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { BookList } from './BookList';
-import { Categories } from './Categories';
-import { People } from './People';
+import { BookList } from './BookList/BookList';
+import { Categories } from './Categories/Categories';
+import { People } from './People/People';
 
 export const Main = () => {
 
@@ -16,3 +16,4 @@ export const Main = () => {
         </div>
     )
 }
+
