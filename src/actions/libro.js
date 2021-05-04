@@ -45,16 +45,16 @@ const libroDelete = (id) => ({
     }
 });
 
-export const libroStartEdit = () => {
-    return async (dispatch) => {
+// export const libroStartEdit = () => {
+//     return async (dispatch) => {
 
-    }
-}
+//     }
+// }
 
-const libroEdit = (id) => ({
-    type: types.libroEdit,
-    payload: id
-});
+// const libroEdit = (id) => ({
+//     type: types.libroEdit,
+//     payload: id
+// });
 
 export const libroStartBorrow = (id, persona_id, alias) => {
 
@@ -80,15 +80,25 @@ const libroBorrow = (id, persona_id, alias) => ({
     }
 });
 
-export const libroStartGetBack = () => {
-    return async (dispatch) => {
+export const libroStartGetBack = (id) => {
+    const url = `${baseUrl}libro/devolver/${id}`;
 
+    return async (dispatch) => {
+        try {
+            const response = await axios.put(url);
+            console.log(response);
+            dispatch(libroGetBack(id));
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
 const libroGetBack = (id) => ({
     type: types.libroGetBack,
-    payload: id
+    payload: {
+        id: id
+    }
 });
 
 

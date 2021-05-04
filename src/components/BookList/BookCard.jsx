@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { libroStartBorrow, libroStartDelete } from '../../actions/libro';
+import { libroStartBorrow, libroStartDelete, libroStartGetBack } from '../../actions/libro';
 
 export const BookCard = ({ nombre, descripcion, categoria, alias, id, persona_id, categoria_id }) => {
 
@@ -15,6 +15,10 @@ export const BookCard = ({ nombre, descripcion, categoria, alias, id, persona_id
         dispatch(libroStartBorrow(id, 1, 'NMANSILLA'));
     }
 
+    const handleGetBack = () => {
+        dispatch(libroStartGetBack(id))
+    }
+
     return (
         <div className="bookcard">
             <span className="bookcard-item">Nombre: {nombre}</span>
@@ -25,7 +29,7 @@ export const BookCard = ({ nombre, descripcion, categoria, alias, id, persona_id
             <button className="btn btn-secondary bookcard-button">Modificar</button>
             {!persona_id
                 ? <button className="btn btn-secondary bookcard-button" onClick={handleBorrow}>Prestar</button>
-                : <button className="btn btn-secondary bookcard-button">Devolver</button>
+                : <button className="btn btn-secondary bookcard-button" onClick={handleGetBack}>Devolver</button>
             }
             <hr />
         </div>

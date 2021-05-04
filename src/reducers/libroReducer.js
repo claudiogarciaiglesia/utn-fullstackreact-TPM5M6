@@ -32,6 +32,15 @@ export const libroReducer = (state = initialState, action) => {
                 )
             }
 
+        case types.libroGetBack:
+            return {
+                ...state,
+                list: state.list.map(
+                    book => (book.id === action.payload.id)
+                        ? { ...book, persona_id: null, alias: '' }
+                        : book
+                )
+            }
 
 
         default:
