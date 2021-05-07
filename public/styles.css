@@ -19,15 +19,41 @@ body {
     display: block;
 }
 
+.bookcard-button {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.categorycard {
+    margin: 0 20px;
+}
+
+.categorycard-item {
+    display: block;
+}
+
+.categorycard-button {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.personacard {
+    margin: 0 20px;
+}
+
+.personacard-item {
+    display: block;
+}
+
+.personacard-button {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
 .sticky {
     position: fixed;
     top: 0;
     width: 100%;
-}
-
-.bookcard-button {
-    margin-top: 10px;
-    margin-right: 10px;
 }
 
 /* FABS */

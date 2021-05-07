@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { categoriaSetActive } from '../../actions/categoria';
 import { libroSetActive, libroStartBorrow, libroStartDelete, libroStartGetBack } from '../../actions/libro';
 import { uiShowAddEditBook } from '../../actions/ui';
 
@@ -9,6 +10,7 @@ export const BookCard = ({ nombre, descripcion, categoria, alias, id, persona_id
 
     const handleDelete = () => {
         dispatch(libroStartDelete(id));
+        dispatch(libroSetActive(null));
     }
 
     const handleBorrow = () => {

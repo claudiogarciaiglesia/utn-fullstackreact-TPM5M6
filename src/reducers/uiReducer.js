@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 
 const initialState = {
-    activePage: null,
+    activePage: 'booklist',
     showAddEditBook: false,
 }
 
