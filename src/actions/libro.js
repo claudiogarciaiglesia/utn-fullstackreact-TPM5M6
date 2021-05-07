@@ -45,16 +45,28 @@ const libroDelete = (id) => ({
     }
 });
 
-// export const libroStartEdit = () => {
-//     return async (dispatch) => {
+export const libroStartEdit = (id, descripcion) => {
 
-//     }
-// }
+    const url = `${baseUrl}libro/${id}`;
 
-// const libroEdit = (id) => ({
-//     type: types.libroEdit,
-//     payload: id
-// });
+    return async (dispatch) => {
+        try {
+            const response = await axios.put(url, { descripcion: descripcion });
+            console.log(response);
+            dispatch(libroEdit(id, descripcion));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+const libroEdit = (id, descripcion) => ({
+    type: types.libroEdit,
+    payload: {
+        id: id,
+        descripcion: descripcion
+    }
+});
 
 export const libroStartBorrow = (id, persona_id, alias) => {
 
@@ -101,4 +113,9 @@ const libroGetBack = (id) => ({
     }
 });
 
-
+export const libroSetActive = (id) => ({
+    type: types.libroSetActive,
+    payload: {
+        id: id
+    }
+})

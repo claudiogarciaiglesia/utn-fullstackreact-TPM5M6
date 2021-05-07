@@ -2,7 +2,8 @@ import { types } from "../types/types";
 
 
 const initialState = {
-    list: []
+    list: [],
+    activeBook: null,
 }
 
 
@@ -40,6 +41,20 @@ export const libroReducer = (state = initialState, action) => {
                         ? { ...book, persona_id: null, alias: '' }
                         : book
                 )
+            }
+
+        case types.libroSetActive:
+            return {
+                ...state,
+                activeBook: state.list.filter(book => (book.id === action.payload.id))[0]
+            }
+
+        case types.libroEdit:
+            return {
+                ...state,
+                list: state.list.map(book => (book.id === action.payload.id)
+                    ? { ...book, descripcion: action.payload.descripcion }
+                    : book)
             }
 
 

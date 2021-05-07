@@ -29,3 +29,21 @@ body {
     margin-top: 10px;
     margin-right: 10px;
 }
+
+/* FABS */
+
+.fab {
+    border-radius: 100%;
+    bottom: 25px;
+    font-size: 20px;
+    padding: 10px;
+    position: fixed;
+    right: 25px;
+}
+
+.fab-danger {
+    bottom: 25px;
+    padding: 10px;
+    position: fixed;
+    left: 25px;
+}
