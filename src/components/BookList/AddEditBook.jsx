@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { libroStartEdit } from '../../actions/libro';
+import { libroStartAdd, libroStartEdit } from '../../actions/libro';
 import { uiShowAddEditBook } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm/useForm';
 
@@ -34,33 +34,53 @@ export const AddEditBook = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(libroStartEdit(activeBook.id, descripcion));
+        activeBook
+            ? dispatch(libroStartEdit(activeBook.id, descripcion.toUpperCase()))
+            : dispatch(libroStartAdd(nombre.toUpperCase(), descripcion.toUpperCase(), categoria_id))
+        dispatch(uiShowAddEditBook(false));
+    }
+
+    const handleCancel = () => {
         dispatch(uiShowAddEditBook(false));
     }
 
     return (
-        <div>
-            <form id="add-modify-book-form" onSubmit={handleSubmit}>
-                <div>
-                    <label>Nombre </label>
-                    <input disabled={!!activeBook ? true : false} type="text" name="nombre" value={nombre} onChange={handleInputChange}></input>
-                </div>
-                <div>
-                    <label>Descripcion </label>
-                    <textarea style={{ width: 500, height: 100, resize: 'none' }} form="add-modify-book-form" name="descripcion" value={descripcion} onChange={handleInputChange}></textarea>
-                </div>
-                <div>
-                    <label>Categoria </label>
-                    <input disabled={!!activeBook ? true : false} type="number" name="categoria_id" value={categoria_id} onChange={handleInputChange}></input>
-                </div>
-                <button type="submit">Aceptar</button>
-            </form>
+        <div className="floating-window">
+            <div className="floating-window-content">
+                <form id="add-modify-form" onSubmit={handleSubmit}>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label>Nombre </label>
+                                </td>
+                                <td>
+                                    <input disabled={!!activeBook ? true : false} type="text" name="nombre" value={nombre} onChange={handleInputChange}></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Descripcion </label>
+                                </td>
+                                <td>
+                                    <textarea style={{ width: 500, height: 100, resize: 'none' }} form="add-modify-form" name="descripcion" value={descripcion} onChange={handleInputChange}></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Categoria </label>
+                                </td>
+                                <td>
+                                    <input disabled={!!activeBook ? true : false} type="number" name="categoria_id" value={categoria_id} onChange={handleInputChange}></input>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-            {/* <FormFields
-                    fields={formField}
-                    handleInputChange={handleInputChange}
-                    submit={handleSubmit}
-                /> */}
+                    <button type="submit">Aceptar</button>
+                    <button type="button" onClick={handleCancel}>Cancelar</button>
+                </form>
+            </div>
         </div>
     )
 }

@@ -5,7 +5,7 @@ const initialState = {
     activePerson: null,
 }
 
-export const personaReducer = (state = initialState, action) =>{
+export const personaReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.personaListLoaded:
             return {
@@ -25,6 +25,25 @@ export const personaReducer = (state = initialState, action) =>{
             return {
                 ...state,
                 activePerson: state.list.filter(person => (person.id === action.payload.id))[0]
+            }
+
+        case types.personaEdit:
+            return {
+                ...state,
+                list: state.list.map(person => (person.id === action.payload.id)
+                    ? {
+                        ...person,
+                        nombre: action.payload.nombre,
+                        apellido: action.payload.apellido,
+                        alias: action.payload.alias
+                    }
+                    : person)
+            }
+
+        case types.personaAdd:
+            return {
+                ...state,
+                list: [...state.list, { ...action.payload }]
             }
 
         default:

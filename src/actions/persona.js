@@ -45,26 +45,65 @@ const personaDelete = (id) => ({
     }
 });
 
-export const personaStartEdit = (id, descripcion) => {
+export const personaStartEdit = (id, nombre, apellido, alias, email) => {
 
     const url = `${baseUrl}persona/${id}`;
 
     return async (dispatch) => {
         try {
-            const response = await axios.put(url, { descripcion: descripcion });
+            const response = await axios.put(url, {
+                nombre: nombre,
+                apellido: apellido,
+                alias: alias,
+                email: email
+            });
             console.log(response);
-            dispatch(personaEdit(id, descripcion));
+            dispatch(personaEdit(id, nombre, apellido, alias, email));
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-const personaEdit = (id, descripcion) => ({
+const personaEdit = (id, nombre, apellido, alias, email) => ({
     type: types.personaEdit,
     payload: {
         id: id,
-        descripcion: descripcion
+        nombre: nombre,
+        apellido: apellido,
+        alias: alias,
+        email: email
+    }
+});
+
+export const personaStartAdd = (nombre, apellido, alias, email) => {
+    const url = `${baseUrl}persona`;
+
+    return async (dispatch) => {
+        try {
+            const response = await axios.post(url, {
+                nombre: nombre,
+                apellido: apellido,
+                alias: alias,
+                email: email
+
+            });
+            console.log(response);
+            dispatch(personaAdd(response.data.id, nombre, apellido, alias, email));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+const personaAdd = (id, nombre, apellido, alias, email) => ({
+    type: types.personaAdd,
+    payload: {
+        id: id,
+        nombre: nombre,
+        apellido: apellido,
+        alias: alias,
+        email: email
     }
 });
 

@@ -1,6 +1,8 @@
 export const types = {
     uiSetActivePage: '[ui] Active Page',
     uiShowAddEditBook: '[ui] Show Add Edit Book',
+    uiShowAddEditCategory: '[ui] Show Add Edit Category',
+    uiShowAddEditPerson: '[ui] Show Add Edit Persona',
 
     libroStartLoadList: '[libro] Start Load List',
     libroListLoaded: '[libro] List Loaded',
@@ -9,16 +11,22 @@ export const types = {
     libroBorrow: '[libro] Borrow',
     libroGetBack: '[libro] Get Back',
     libroSetActive: '[libro] Set Active',
+    libroStartAdd: '[libro] Start Add',
+    libroAdd: '[libro] Add',
 
     categoriaStartLoadList: '[categoria] Start Load List',
     categoriaListLoaded: '[categoria] List Loaded',
     categoriaDelete: '[categoria] Delete',
     categoriaEdit: '[categoria] Edit',
     categoriaSetActive: '[categoria] Set Active',
+    categoriaStartAdd: '[categoria] Start Add',
+    categoriaAdd: '[categoria] Add',
 
     personaStartLoadList: '[persona] Start Load List',
     personaListLoaded: '[persona] List Loaded',
     personaDelete: '[persona] Delete',
     personaEdit: '[persona] Edit',
     personaSetActive: '[persona] Set Active',
+    personaStartAdd: '[persona] Start Add',
+    personaAdd: '[persona] Add',
 }

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { categoriaStartLoadList } from '../../actions/categoria';
+import { AddEditCategory } from './AddEditCategory';
 import { CategoryCard } from './CategoryCard';
 
 export const Categories = () => {
 
     const dispatch = useDispatch();
-    // const showAddEditCategory = useSelector(state => state.ui.showAddEditCategory);
+    const showAddEditCategory = useSelector(state => state.ui.showAddEditCategory);
 
     const categorias = useSelector(state => state.categoria.list);
 
@@ -26,7 +27,7 @@ export const Categories = () => {
                     />
                 )
             })}
-            {/* {showAddEditCategory && <AddEditCategory />} */}
+            {showAddEditCategory && <AddEditCategory />}
         </div>
     )
 }

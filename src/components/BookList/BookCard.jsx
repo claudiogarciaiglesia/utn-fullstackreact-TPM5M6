@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { categoriaSetActive } from '../../actions/categoria';
 import { libroSetActive, libroStartBorrow, libroStartDelete, libroStartGetBack } from '../../actions/libro';
 import { uiShowAddEditBook } from '../../actions/ui';
 

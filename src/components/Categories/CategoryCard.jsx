@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { categoriaSetActive, categoriaStartDelete } from '../../actions/categoria';
-// import { uiShowAddEditBook } from '../../actions/ui';
+import { uiShowAddEditCategory } from '../../actions/ui';
 
 export const CategoryCard = ({ nombre, id }) => {
 
@@ -14,7 +14,7 @@ export const CategoryCard = ({ nombre, id }) => {
 
     const handleModify = () => {
         dispatch(categoriaSetActive(id));
-        // dispatch(uiShowAddEditBook(true))
+        dispatch(uiShowAddEditCategory(true))
     }
 
     return (

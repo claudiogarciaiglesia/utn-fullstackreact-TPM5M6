@@ -3,6 +3,8 @@ import { types } from "../types/types";
 const initialState = {
     activePage: 'booklist',
     showAddEditBook: false,
+    showAddEditCategory: false,
+    showAddEditPerson: false,
 }
 
 export const uiReducer = (state = initialState, action) => {
@@ -19,6 +21,18 @@ export const uiReducer = (state = initialState, action) => {
                 showAddEditBook: action.payload
             }
 
+        case types.uiShowAddEditCategory:
+            return {
+                ...state,
+                showAddEditCategory: action.payload
+            }
+
+
+        case types.uiShowAddEditPerson:
+            return {
+                ...state,
+                showAddEditPerson: action.payload
+            }
 
         default:
             return state;

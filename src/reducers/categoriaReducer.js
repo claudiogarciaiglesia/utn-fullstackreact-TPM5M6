@@ -27,6 +27,20 @@ export const categoriaReducer = (state = initialState, action) => {
                 activeCategory: state.list.filter(category => (category.id === action.payload.id))[0]
             }
 
+        case types.categoriaEdit:
+            return {
+                ...state,
+                list: state.list.map(categoria => (categoria.id === action.payload.id)
+                    ? { ...categoria, nombre: action.payload.nombre }
+                    : categoria)
+            }
+
+        case types.categoriaAdd:
+            return {
+                ...state,
+                list: [...state.list, { ...action.payload }]
+            }
+
         default:
             return state;
     }

@@ -60,6 +60,35 @@ export const libroStartEdit = (id, descripcion) => {
     }
 }
 
+export const libroStartAdd = (nombre, descripcion, categoria_id) => {
+    const url = `${baseUrl}libro`;
+
+    return async (dispatch) => {
+        try {
+            const response = await axios.post(url, {
+                nombre: nombre,
+                descripcion: descripcion,
+                categoria_id: categoria_id
+            });
+            console.log(response);
+            dispatch(libroAdd(response.data.id, nombre, descripcion, categoria_id));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+const libroAdd = (id, nombre, descripcion, categoria_id) => ({
+    type: types.libroAdd,
+    payload: {
+        id: id,
+        nombre: nombre,
+        descripcion: descripcion,
+        categoria_id: categoria_id
+    }
+});
+
+
 const libroEdit = (id, descripcion) => ({
     type: types.libroEdit,
     payload: {
@@ -118,4 +147,4 @@ export const libroSetActive = (id) => ({
     payload: {
         id: id
     }
-})
+});

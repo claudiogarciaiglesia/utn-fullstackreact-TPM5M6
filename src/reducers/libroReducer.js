@@ -57,6 +57,12 @@ export const libroReducer = (state = initialState, action) => {
                     : book)
             }
 
+        case types.libroAdd:
+            return {
+                ...state,
+                list: [...state.list, { ...action.payload, persona_id: null, alias: null }]
+            }
+
 
         default:
             return state;

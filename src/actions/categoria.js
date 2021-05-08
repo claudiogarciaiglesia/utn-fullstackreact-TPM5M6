@@ -45,26 +45,48 @@ const categoriaDelete = (id) => ({
     }
 });
 
-export const categoriaStartEdit = (id, descripcion) => {
+export const categoriaStartEdit = (id, nombre) => {
 
     const url = `${baseUrl}categoria/${id}`;
 
     return async (dispatch) => {
         try {
-            const response = await axios.put(url, { descripcion: descripcion });
+            const response = await axios.put(url, { nombre: nombre });
             console.log(response);
-            dispatch(categoriaEdit(id, descripcion));
+            dispatch(categoriaEdit(id, nombre));
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-const categoriaEdit = (id, descripcion) => ({
+export const categoriaStartAdd = (nombre) => {
+    const url = `${baseUrl}categoria`;
+
+    return async (dispatch) => {
+        try {
+            const response = await axios.post(url, { nombre: nombre });
+            console.log(response);
+            dispatch(categoriaAdd(response.data.id, nombre));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+const categoriaAdd = (id, nombre) => ({
+    type: types.categoriaAdd,
+    payload: {
+        id: id,
+        nombre: nombre,
+    }
+});
+
+const categoriaEdit = (id, nombre) => ({
     type: types.categoriaEdit,
     payload: {
         id: id,
-        descripcion: descripcion
+        nombre: nombre
     }
 });
 

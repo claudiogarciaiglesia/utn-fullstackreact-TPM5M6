@@ -9,3 +9,13 @@ export const uiShowAddEditBook = (payload) => ({
     type: types.uiShowAddEditBook,
     payload: payload
 })
+
+export const uiShowAddEditCategory = (payload) => ({
+    type: types.uiShowAddEditCategory,
+    payload: payload
+})
+
+export const uiShowAddEditPerson = (payload) => ({
+    type: types.uiShowAddEditPerson,
+    payload: payload
+})
