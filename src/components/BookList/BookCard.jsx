@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { libroSetActive, libroStartBorrow, libroStartDelete, libroStartGetBack } from '../../actions/libro';
-import { uiShowAddEditBook } from '../../actions/ui';
+import { libroSetActive, libroStartDelete, libroStartGetBack } from '../../actions/libro';
+import { uiShowAddEditBook, uiShowBorrowBook } from '../../actions/ui';
 
 export const BookCard = ({ nombre, descripcion, categoria, alias, id, persona_id, categoria_id }) => {
 
@@ -14,7 +14,9 @@ export const BookCard = ({ nombre, descripcion, categoria, alias, id, persona_id
 
     const handleBorrow = () => {
         // Esto se debe completar con un MODAL para seleccionar a la persona
-        dispatch(libroStartBorrow(id, 1, 'NMANSILLA'));
+        dispatch(libroSetActive(id));
+        // dispatch(libroStartBorrow(id, 1, 'NMANSILLA'));
+        dispatch(uiShowBorrowBook(true))
     }
 
     const handleGetBack = () => {

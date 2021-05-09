@@ -8,24 +8,36 @@ import { useForm } from '../../hooks/useForm/useForm';
 const initFormValues = {
     nombre: '',
     descripcion: '',
-    categoria_id: 1,
+    categoria: {
+        value: '',
+        label: '',
+    }
 }
 
 export const AddEditBook = () => {
 
+
     const activeBook = useSelector(state => state.libro.activeBook);
+    const listaCategorias = useSelector(state => state.categoria.list);
 
     const dispatch = useDispatch();
 
-    const [{ nombre, descripcion, categoria_id }, setFormField, handleInputChange] = useForm(initFormValues);
+    const options = listaCategorias.map(categoria => (
+        { label: categoria.nombre, value: JSON.stringify({ id: categoria.id, nombre: categoria.nombre }) }
+    ));
 
+    const [{ nombre, descripcion, categoria }, setFormField, handleInputChange] = useForm(initFormValues);
+
+    console.log(categoria);
     useEffect(() => {
 
         if (activeBook) {
+
             setFormField({
                 nombre: activeBook.nombre,
                 descripcion: activeBook.descripcion,
-                categoria_id: activeBook.categoria_id,
+                categoria: JSON.stringify({ id: activeBook.categoria_id, nombre: activeBook.categoria })
+
             });
         } else {
             setFormField(initFormValues)
@@ -34,9 +46,10 @@ export const AddEditBook = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(JSON.parse(categoria));
         activeBook
             ? dispatch(libroStartEdit(activeBook.id, descripcion.toUpperCase()))
-            : dispatch(libroStartAdd(nombre.toUpperCase(), descripcion.toUpperCase(), categoria_id))
+            : dispatch(libroStartAdd(nombre.toUpperCase(), descripcion.toUpperCase(), JSON.parse(categoria)))
         dispatch(uiShowAddEditBook(false));
     }
 
@@ -55,7 +68,7 @@ export const AddEditBook = () => {
                                     <label>Nombre </label>
                                 </td>
                                 <td>
-                                    <input disabled={!!activeBook ? true : false} type="text" name="nombre" value={nombre} onChange={handleInputChange}></input>
+                                    <input required disabled={!!activeBook ? true : false} type="text" name="nombre" value={nombre} onChange={handleInputChange}></input>
                                 </td>
                             </tr>
                             <tr>
@@ -63,15 +76,18 @@ export const AddEditBook = () => {
                                     <label>Descripcion </label>
                                 </td>
                                 <td>
-                                    <textarea style={{ width: 500, height: 100, resize: 'none' }} form="add-modify-form" name="descripcion" value={descripcion} onChange={handleInputChange}></textarea>
+                                    <textarea required style={{ width: 500, height: 100, resize: 'none' }} form="add-modify-form" name="descripcion" value={descripcion} onChange={handleInputChange}></textarea>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Categoria </label>
+                                    <label htmlFor="seleccion-categorias">Categoria </label>
                                 </td>
                                 <td>
-                                    <input disabled={!!activeBook ? true : false} type="number" name="categoria_id" value={categoria_id} onChange={handleInputChange}></input>
+                                    <select required value={categoria} onChange={handleInputChange} disabled={!!activeBook ? true : false} id="seleccion-categorias" name="categoria">
+                                        <option></option>
+                                        {options.map((option, index) => (<option key={index} value={option.value}>{option.label}</option>))}
+                                    </select>
                                 </td>
                             </tr>
                         </tbody>
@@ -81,6 +97,6 @@ export const AddEditBook = () => {
                     <button type="button" onClick={handleCancel}>Cancelar</button>
                 </form>
             </div>
-        </div>
+        </div >
     )
 }

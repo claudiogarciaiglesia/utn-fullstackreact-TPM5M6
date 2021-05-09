@@ -10,6 +10,11 @@ export const uiShowAddEditBook = (payload) => ({
     payload: payload
 })
 
+export const uiShowBorrowBook = (payload) => ({
+    type: types.uiShowBorrowBook,
+    payload: payload
+})
+
 export const uiShowAddEditCategory = (payload) => ({
     type: types.uiShowAddEditCategory,
     payload: payload

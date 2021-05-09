@@ -67,6 +67,17 @@ body {
     right: 25px;
 }
 
+.fab-remove-filter {
+    /* border-color: red;
+    background-color: red; */
+    /* border-radius: 5%; */
+    top:70px;
+    font-size: 20px;
+    /* padding: 10px; */
+    position: fixed;
+    right: 25px;
+}
+
 .fab-danger {
     bottom: 25px;
     padding: 10px;
@@ -105,7 +116,7 @@ body {
     /* Could be more or less, depending on screen size */
 }
 
-.floating-window-content input {
+.floating-window-content input, select, option {
     width: 100%;
 }
 

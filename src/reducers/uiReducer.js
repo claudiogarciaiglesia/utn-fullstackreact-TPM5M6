@@ -5,6 +5,7 @@ const initialState = {
     showAddEditBook: false,
     showAddEditCategory: false,
     showAddEditPerson: false,
+    showBorrowBook: false,
 }
 
 export const uiReducer = (state = initialState, action) => {
@@ -19,6 +20,12 @@ export const uiReducer = (state = initialState, action) => {
             return {
                 ...state,
                 showAddEditBook: action.payload
+            }
+
+        case types.uiShowBorrowBook:
+            return {
+                ...state,
+                showBorrowBook: action.payload
             }
 
         case types.uiShowAddEditCategory:

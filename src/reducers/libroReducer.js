@@ -4,6 +4,8 @@ import { types } from "../types/types";
 const initialState = {
     list: [],
     activeBook: null,
+    filterByCategory: null,
+    filterByPerson: null
 }
 
 
@@ -63,6 +65,19 @@ export const libroReducer = (state = initialState, action) => {
                 list: [...state.list, { ...action.payload, persona_id: null, alias: null }]
             }
 
+        case types.libroFilterByCategory:
+            return {
+                ...state,
+                filterByCategory: action.payload.id,
+                list: state.list.filter(book => (book.categoria_id === action.payload.id))
+            }
+
+        case types.libroFilterByPerson:
+            return {
+                ...state,
+                filterByPerson: action.payload.id,
+                list: state.list.filter(book => (book.persona_id === action.payload.id))
+            }
 
         default:
             return state;

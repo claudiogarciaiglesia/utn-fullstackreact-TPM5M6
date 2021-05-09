@@ -1,6 +1,7 @@
 export const types = {
     uiSetActivePage: '[ui] Active Page',
     uiShowAddEditBook: '[ui] Show Add Edit Book',
+    uiShowBorrowBook: '[ui] Show Borrow Book',
     uiShowAddEditCategory: '[ui] Show Add Edit Category',
     uiShowAddEditPerson: '[ui] Show Add Edit Persona',
 
@@ -13,6 +14,8 @@ export const types = {
     libroSetActive: '[libro] Set Active',
     libroStartAdd: '[libro] Start Add',
     libroAdd: '[libro] Add',
+    libroFilterByCategory: '[libro] Filter By Category',
+    libroFilterByPerson: '[libro] Filter By Person',
 
     categoriaStartLoadList: '[categoria] Start Load List',
     categoriaListLoaded: '[categoria] List Loaded',

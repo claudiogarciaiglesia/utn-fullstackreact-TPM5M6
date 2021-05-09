@@ -60,7 +60,7 @@ export const libroStartEdit = (id, descripcion) => {
     }
 }
 
-export const libroStartAdd = (nombre, descripcion, categoria_id) => {
+export const libroStartAdd = (nombre, descripcion, categoria) => {
     const url = `${baseUrl}libro`;
 
     return async (dispatch) => {
@@ -68,23 +68,25 @@ export const libroStartAdd = (nombre, descripcion, categoria_id) => {
             const response = await axios.post(url, {
                 nombre: nombre,
                 descripcion: descripcion,
-                categoria_id: categoria_id
+                categoria_id: parseInt(categoria.id)
             });
             console.log(response);
-            dispatch(libroAdd(response.data.id, nombre, descripcion, categoria_id));
+            dispatch(libroAdd(response.data.id, nombre, descripcion, categoria));
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-const libroAdd = (id, nombre, descripcion, categoria_id) => ({
+const libroAdd = (id, nombre, descripcion, categoria) => ({
     type: types.libroAdd,
     payload: {
         id: id,
         nombre: nombre,
         descripcion: descripcion,
-        categoria_id: categoria_id
+        categoria_id: categoria.id,
+        categoria: categoria.nombre
+
     }
 });
 
@@ -144,6 +146,20 @@ const libroGetBack = (id) => ({
 
 export const libroSetActive = (id) => ({
     type: types.libroSetActive,
+    payload: {
+        id: id
+    }
+});
+
+export const libroFilterByCategory = (id) => ({
+    type: types.libroFilterByCategory,
+    payload: {
+        id: id
+    }
+});
+
+export const libroFilterByPerson = (id) => ({
+    type: types.libroFilterByPerson,
     payload: {
         id: id
     }

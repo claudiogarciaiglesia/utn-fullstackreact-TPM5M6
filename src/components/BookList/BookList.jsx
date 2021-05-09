@@ -1,21 +1,18 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { libroStartLoadList } from '../../actions/libro';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { AddEditBook } from './AddEditBook';
 import { BookCard } from './BookCard';
+import { BorrowBook } from './BorrowBook';
+import { RemoveFilterFab } from './RemoveFilterFab';
 
 export const BookList = () => {
 
-    const dispatch = useDispatch();
     const showAddEditBook = useSelector(state => state.ui.showAddEditBook);
+    const showBorrowBook = useSelector(state => state.ui.showBorrowBook)
+    const filterByCategory = useSelector(state => state.libro.filterByCategory);
+    const filterByPerson = useSelector(state => state.libro.filterByPerson);
 
     const libros = useSelector(state => state.libro.list);
-
-    useEffect(() => {
-
-        dispatch(libroStartLoadList())
-
-    }, [dispatch])
 
     return (
         <div>
@@ -28,6 +25,9 @@ export const BookList = () => {
                 )
             })}
             {showAddEditBook && <AddEditBook />}
+            {showBorrowBook && <BorrowBook />}
+            {(filterByCategory || filterByPerson) && <RemoveFilterFab/>}
         </div>
     )
 }
+
