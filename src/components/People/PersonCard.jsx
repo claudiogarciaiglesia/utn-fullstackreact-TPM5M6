@@ -26,18 +26,32 @@ export const PersonCard = ({ nombre, apellido, alias, email, id }) => {
     }
 
     return (
-        <div className="personcard">
-            <span className="personcard-item">Nombre: {nombre}</span>
-            <span className="personcard-item">Apellido: {apellido}</span>
-            <span className="personcard-item">Alias: {alias}</span>
-            <span className="personcard-item">Email: {email}</span>
-
-            <div>
-                <button className="btn btn-danger personcard-button" onClick={handleDelete}>Borrar</button>
-                <button className="btn btn-secondary personcard-button" onClick={handleModify}>Modificar</button>
-                <button className="btn btn-secondary categorycard-button" onClick={handleFilter}>Ver libros</button>
+        <>
+            <div className="containerImg row_devuelto">
+                <div className="ct">
+                    <div className="ctxt">
+                        <h2 className="titles">{`${nombre} ${apellido}`}</h2>
+                        <p className="description">
+                            {alias}
+                        </p>
+                        <p className="alias">
+                            {email}
+                        </p>
+                    </div>
+                    <div className="cb">
+                        <div className="buttons editar">
+                            <p className="text_buttons" onClick={handleDelete}>Borrar</p>
+                        </div>
+                        <div className="buttons eliminar" onClick={handleModify}>
+                            <p className="text_buttons">Modificar</p>
+                        </div>
+                        <div className="buttons devuelto" onClick={handleFilter}>
+                        <p className="text_buttons">Filtrar Libros</p>
+                    </div>
+                    </div>
+                </div>
+                <div className="borders"></div>
             </div>
-            <hr />
-        </div>
+        </>
     )
 }

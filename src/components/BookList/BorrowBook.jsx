@@ -28,7 +28,6 @@ export const BorrowBook = () => {
         e.preventDefault();
         if (!!persona) {
             const personaSeleccionada = JSON.parse(persona);
-            console.log(personaSeleccionada);
             dispatch(libroStartBorrow(activeBook.id, personaSeleccionada.id, personaSeleccionada.alias));
         }
         dispatch(uiShowBorrowBook(false));
@@ -39,28 +38,26 @@ export const BorrowBook = () => {
         dispatch(uiShowBorrowBook(false));
     }
 
+    const handleClose = (e) => {
+        if (e.target.className === 'floating-window') {
+            handleCancel();
+        }
+    }
+
     return (
-        <div className="floating-window">
+        <div onMouseDown={handleClose} className="floating-window">
             <div className="floating-window-content">
                 <form id="add-modify-form" onSubmit={handleSubmit}>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <label htmlFor="seleccion-persona">Personas </label>
-                                </td>
-                                <td>
-                                    <select required value={persona} onChange={handleInputChange} id="seleccion-persona" name="persona">
+                <div className="form-group mb-3">
+                <label htmlFor="seleccion-persona">Personas </label>
+                        <select className="form-control" required value={persona} onChange={handleInputChange} id="seleccion-persona" name="persona">
                                         <option></option>
                                         {options.map((option, index) => (<option key={index} value={option.value}>{option.label}</option>))}
                                     </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    </div>
 
-                    <button type="submit">Aceptar</button>
-                    <button type="button" onClick={handleCancel}>Cancelar</button>
+                    <button type="submit" className="btn btn-success">Aceptar</button>
+                        <button type="button" className="btn btn-danger" onClick={handleCancel}>Cancelar</button>
                 </form>
             </div>
         </div >

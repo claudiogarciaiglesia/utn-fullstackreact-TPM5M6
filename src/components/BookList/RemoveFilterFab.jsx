@@ -1,7 +1,6 @@
 //fab: floating action button
 
 import React from 'react'
-import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { libroFilterByCategory, libroFilterByPerson, libroStartLoadList } from '../../actions/libro';
 

@@ -42,26 +42,22 @@ export const AddEditCategory = () => {
         dispatch(uiShowAddEditCategory(false));
     }
 
+    const handleClose = (e) => {
+        if (e.target.className === 'floating-window') {
+            handleCancel();
+        }
+    }
     return (
-        <div className="floating-window">
+        <div onMouseDown={handleClose} className="floating-window">
             <div className="floating-window-content">
                 <form id="add-modify-form" onSubmit={handleSubmit}>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <label>Nombre </label>
-                                </td>
-                                <td>
-                                    <input type="text" name="nombre" value={nombre} onChange={handleInputChange}></input>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="form-group mb-3">
+                        <label>Nombre</label>
+                        <input type="text" className="form-control" name="nombre" value={nombre} onChange={handleInputChange}></input>
+                    </div>
 
-                    {/* </div> */}
-                    <button type="submit">Aceptar</button>
-                    <button type="button" onClick={handleCancel}>Cancelar</button>
+                    <button type="submit" className="btn btn-success">Aceptar</button>
+                    <button type="button" className="btn btn-danger" onClick={handleCancel}>Cancelar</button>
                 </form>
             </div>
         </div>

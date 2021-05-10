@@ -1,5 +1,6 @@
 import axios from "axios";
 import { types } from "../types/types";
+import Swal from 'sweetalert2';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
@@ -14,6 +15,7 @@ export const libroStartLoadList = () => {
             dispatch(libroListLoaded(response.data));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 };
@@ -29,11 +31,13 @@ export const libroStartDelete = (id) => {
 
     return async (dispatch) => {
         try {
+            /* eslint-disable */
             const response = await axios.delete(url);
-            console.log(response);
+            /* eslint-enable */
             dispatch(libroDelete(id));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 }
@@ -51,11 +55,13 @@ export const libroStartEdit = (id, descripcion) => {
 
     return async (dispatch) => {
         try {
+            /* eslint-disable */
             const response = await axios.put(url, { descripcion: descripcion });
-            console.log(response);
+             /* eslint-enable */
             dispatch(libroEdit(id, descripcion));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 }
@@ -70,10 +76,10 @@ export const libroStartAdd = (nombre, descripcion, categoria) => {
                 descripcion: descripcion,
                 categoria_id: parseInt(categoria.id)
             });
-            console.log(response);
             dispatch(libroAdd(response.data.id, nombre, descripcion, categoria));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 }
@@ -105,11 +111,13 @@ export const libroStartBorrow = (id, persona_id, alias) => {
 
     return async (dispatch) => {
         try {
+            /* eslint-disable */
             const response = await axios.put(url, { persona_id: persona_id });
-            console.log(response);
+            /* eslint-enable */
             dispatch(libroBorrow(id, persona_id, alias));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 }
@@ -128,11 +136,13 @@ export const libroStartGetBack = (id) => {
 
     return async (dispatch) => {
         try {
+            /* eslint-disable */
             const response = await axios.put(url);
-            console.log(response);
+            /* eslint-enable */
             dispatch(libroGetBack(id));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 }

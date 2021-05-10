@@ -16,7 +16,6 @@ const initFormValues = {
 
 export const AddEditBook = () => {
 
-
     const activeBook = useSelector(state => state.libro.activeBook);
     const listaCategorias = useSelector(state => state.categoria.list);
 
@@ -28,7 +27,6 @@ export const AddEditBook = () => {
 
     const [{ nombre, descripcion, categoria }, setFormField, handleInputChange] = useForm(initFormValues);
 
-    console.log(categoria);
     useEffect(() => {
 
         if (activeBook) {
@@ -46,55 +44,47 @@ export const AddEditBook = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(JSON.parse(categoria));
         activeBook
             ? dispatch(libroStartEdit(activeBook.id, descripcion.toUpperCase()))
             : dispatch(libroStartAdd(nombre.toUpperCase(), descripcion.toUpperCase(), JSON.parse(categoria)))
         dispatch(uiShowAddEditBook(false));
     }
 
-    const handleCancel = () => {
+    const handleCancel = (e) => {
         dispatch(uiShowAddEditBook(false));
     }
 
+    const handleClose = (e) => {
+        if (e.target.className === 'floating-window') {
+            handleCancel();
+        }
+    }
+
     return (
-        <div className="floating-window">
+
+        <div onMouseDown={handleClose} className="floating-window">
             <div className="floating-window-content">
                 <form id="add-modify-form" onSubmit={handleSubmit}>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <label>Nombre </label>
-                                </td>
-                                <td>
-                                    <input required disabled={!!activeBook ? true : false} type="text" name="nombre" value={nombre} onChange={handleInputChange}></input>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>Descripcion </label>
-                                </td>
-                                <td>
-                                    <textarea required style={{ width: 500, height: 100, resize: 'none' }} form="add-modify-form" name="descripcion" value={descripcion} onChange={handleInputChange}></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label htmlFor="seleccion-categorias">Categoria </label>
-                                </td>
-                                <td>
-                                    <select required value={categoria} onChange={handleInputChange} disabled={!!activeBook ? true : false} id="seleccion-categorias" name="categoria">
-                                        <option></option>
-                                        {options.map((option, index) => (<option key={index} value={option.value}>{option.label}</option>))}
-                                    </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="form-group mb-3">
+                        <label>Nombre</label>
+                        <input required disabled={!!activeBook ? true : false} type="text" className="form-control" name="nombre" value={nombre} onChange={handleInputChange}></input>
+                    </div>
 
-                    <button type="submit">Aceptar</button>
-                    <button type="button" onClick={handleCancel}>Cancelar</button>
+                    <div className="form-group mb-3">
+                        <label>Descripcion</label>
+                        <textarea required style={{ width: 500, height: 100, resize: 'none' }} className="form-control" name="descripcion" value={descripcion} onChange={handleInputChange}></textarea>
+                    </div>
+
+                    <div className="form-group mb-3">
+                        <label htmlFor="seleccion-categorias">Categoria </label>
+                        <select size="1" className="form-select" required value={categoria} onChange={handleInputChange} disabled={!!activeBook ? true : false} id="seleccion-categorias" name="categoria">
+                            <option></option>
+                            {options.map((option, index) => (<option key={index} value={option.value}>{option.label}</option>))}
+                        </select>
+                    </div>
+
+                    <button type="submit" className="btn btn-success">Aceptar</button>
+                        <button type="button" className="btn btn-danger" onClick={handleCancel}>Cancelar</button>
                 </form>
             </div>
         </div >

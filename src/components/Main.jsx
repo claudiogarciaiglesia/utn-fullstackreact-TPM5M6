@@ -29,6 +29,9 @@ export const Main = () => {
             {activePage === "categories" && <Categories />}
             {activePage === "people" && <People />}
             {!!activePage && <AddNewFab />}
+            {/* <NewBook/> */}
+            {/* <ModalForm/> */}
+            
         </div>
     )
 }

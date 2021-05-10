@@ -41,6 +41,7 @@ export const uiReducer = (state = initialState, action) => {
                 showAddEditPerson: action.payload
             }
 
+
         default:
             return state;
     }

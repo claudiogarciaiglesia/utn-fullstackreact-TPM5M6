@@ -1,5 +1,7 @@
 import axios from "axios";
 import { types } from "../types/types";
+import Swal from 'sweetalert2';
+
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
@@ -14,6 +16,7 @@ export const personaStartLoadList = () => {
             dispatch(personaListLoaded(response.data));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 };
@@ -29,11 +32,13 @@ export const personaStartDelete = (id) => {
 
     return async (dispatch) => {
         try {
+            /* eslint-disable */
             const response = await axios.delete(url);
-            console.log(response);
+            /* eslint-enable */
             dispatch(personaDelete(id));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 }
@@ -51,16 +56,18 @@ export const personaStartEdit = (id, nombre, apellido, alias, email) => {
 
     return async (dispatch) => {
         try {
+            /* eslint-disable */
             const response = await axios.put(url, {
                 nombre: nombre,
                 apellido: apellido,
                 alias: alias,
                 email: email
             });
-            console.log(response);
+            /* eslint-enable */
             dispatch(personaEdit(id, nombre, apellido, alias, email));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 }
@@ -81,17 +88,18 @@ export const personaStartAdd = (nombre, apellido, alias, email) => {
 
     return async (dispatch) => {
         try {
+            /* eslint-disable */
             const response = await axios.post(url, {
                 nombre: nombre,
                 apellido: apellido,
                 alias: alias,
                 email: email
-
             });
-            console.log(response);
+            /* eslint-disable */
             dispatch(personaAdd(response.data.id, nombre, apellido, alias, email));
         } catch (error) {
             console.log(error);
+            Swal.fire('Error', error.response.data.mensaje, 'error')
         }
     }
 }

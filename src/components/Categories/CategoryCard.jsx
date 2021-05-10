@@ -24,14 +24,26 @@ export const CategoryCard = ({ nombre, id }) => {
     }
 
     return (
-        <div className="categorycard">
-            <span className="cateogorycard-item">{nombre}</span>
-            <div>
-                <button className="btn btn-danger categorycard-button" onClick={handleDelete}>Borrar</button>
-                <button className="btn btn-secondary categorycard-button" onClick={handleModify}>Modificar</button>
-                <button className="btn btn-secondary categorycard-button" onClick={handleFilter}>Ver libros</button>
+        <>
+        <div className="containerImg row_devuelto">
+            <div className="ct">
+                <div className="ctxt">
+                    <h2 className="titles">{nombre}</h2>
+                </div>
+                <div className="cb">
+                    <div className="buttons editar">
+                        <p className="text_buttons" onClick={handleDelete}>Borrar</p>
+                    </div>
+                    <div className="buttons eliminar" onClick={handleModify}>
+                        <p className="text_buttons">Modificar</p>
+                    </div>
+                    <div className="buttons devuelto" onClick={handleFilter}>
+                        <p className="text_buttons">Filtrar Libros</p>
+                    </div>
+                </div>
             </div>
-            <hr />
+            <div className="borders"></div>
         </div>
+    </>
     )
 }

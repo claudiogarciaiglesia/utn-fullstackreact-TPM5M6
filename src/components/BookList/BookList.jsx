@@ -14,6 +14,8 @@ export const BookList = () => {
 
     const libros = useSelector(state => state.libro.list);
 
+
+
     return (
         <div>
             {libros.map(libro => {
@@ -26,7 +28,7 @@ export const BookList = () => {
             })}
             {showAddEditBook && <AddEditBook />}
             {showBorrowBook && <BorrowBook />}
-            {(filterByCategory || filterByPerson) && <RemoveFilterFab/>}
+            {(filterByCategory || filterByPerson) && <RemoveFilterFab />}
         </div>
     )
 }
